@@ -3,7 +3,7 @@ import { Formik } from 'formik';
 import { SearchBarEl, FormEl, Input, Btn } from './Searchbar.styled';
 import { AiOutlineSearch } from 'react-icons/ai';
 
-export default function SearchBar(onSubmit) {
+export default function SearchBar({ onSubmit }) {
   const initialValues = {
     searchQuery: '',
   };
@@ -13,8 +13,8 @@ export default function SearchBar(onSubmit) {
     actions.resetForm();
   };
   return (
-    <SearchBarEl>
-      <Formik initialValues={{ initialValues }} onSubmit={handleSubmit}>
+    <Formik initialValues={{ initialValues }} onSubmit={handleSubmit}>
+      <SearchBarEl>
         <FormEl>
           <Btn type="submit">
             <AiOutlineSearch size={30} />
@@ -28,8 +28,8 @@ export default function SearchBar(onSubmit) {
             placeholder="Search images and photos"
           />
         </FormEl>
-      </Formik>
-    </SearchBarEl>
+      </SearchBarEl>
+    </Formik>
   );
 }
 
