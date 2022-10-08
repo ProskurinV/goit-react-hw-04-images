@@ -41,7 +41,7 @@ export default class Modal extends Component {
     return createPortal(
       <ModalBackdrop onClick={this.handleClikOnBackdrop}>
         <ModalWindow>
-          <Img src="" alt="" />
+          {/* <Img src={largeImageURL} alt={tags} /> */}
         </ModalWindow>
       </ModalBackdrop>,
       modalRoot

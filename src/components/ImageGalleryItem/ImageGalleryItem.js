@@ -3,10 +3,15 @@
 import { Item, Img } from './ImageGalleryItem.styled';
 // Компонент элемента списка с изображением. Создает DOM-элемент следующей структуры.
 
-export default function ImageGlleryItem() {
+export default function ImageGlleryItem({
+  id,
+  webformatURL,
+  largeImageURL,
+  tags,
+}) {
   return (
-    <Item class="gallery-item">
-      <Img src="" alt="" />
+    <Item id={id}>
+      <Img src={webformatURL} alt={tags} />
     </Item>
   );
 }

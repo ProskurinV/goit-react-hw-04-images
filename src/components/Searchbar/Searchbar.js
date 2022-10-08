@@ -4,9 +4,8 @@ import { SearchBarEl, FormEl, Input, Btn } from './Searchbar.styled';
 import { AiOutlineSearch } from 'react-icons/ai';
 
 export default function SearchBar({ onSubmit }) {
-  const handleSubmit = (values, actions) => {
-    onSubmit(values);
-    console.log(values);
+  const handleSubmit = async (values, actions) => {
+    await onSubmit(values);
     actions.setSubmitting(false);
     actions.resetForm();
   };
@@ -21,7 +20,7 @@ export default function SearchBar({ onSubmit }) {
             <Input
               name="searchQuery"
               type="text"
-              autocomplete="off"
+              autoComplete="off"
               autoFocus
               placeholder="Search images and photos"
             />
