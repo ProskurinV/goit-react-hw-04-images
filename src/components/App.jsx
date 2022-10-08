@@ -19,30 +19,35 @@ export default class App extends Component {
     page: 1,
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    const { page, query } = this.state;
-    const { page: prevPage, query: prevQuery } = prevState;
-    if (prevPage !== page || prevQuery !== query) {
-      // this.setState({ isLoading: true });
+  async componentDidUpdate(prevProps, prevState) {
+    try {
+      const { page, query } = this.state;
+      const { page: prevPage, query: prevQuery } = prevState;
+      if (prevPage !== page || prevQuery !== query) {
+        // this.setState({ isLoading: true });
 
-      const response = getImg(query, page);
-      const images = response.hits;
+        const response = await getImg(query, page);
+        const images = response.hits;
 
-      this.setState(({ items }) => ({
-        items: [...items, ...images],
-      }));
+        this.setState(({ items }) => ({
+          items: [...items, ...images],
+        }));
+        console.log(images);
+        console.log(response);
+        console.log(query);
 
-      // this.setState({ isLoading: false });
-    }
+        // this.setState({ isLoading: false });
+      }
+    } catch (error) {}
   }
 
-  handlerFormSubmit = () => {
+  handlerFormSubmit = values => {
     this.setState({
       page: 1,
       // isLoading: false,
       // error: false,
       items: [],
-      query: '',
+      query: values.searchQuery,
     });
   };
 

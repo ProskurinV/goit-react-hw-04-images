@@ -6,6 +6,7 @@ import { AiOutlineSearch } from 'react-icons/ai';
 export default function SearchBar({ onSubmit }) {
   const handleSubmit = (values, actions) => {
     onSubmit(values);
+    console.log(values);
     actions.setSubmitting(false);
     actions.resetForm();
   };
