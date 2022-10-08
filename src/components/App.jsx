@@ -23,7 +23,7 @@ export default class App extends Component {
     const { page, query } = this.state;
     const { page: prevPage, query: prevQuery } = prevState;
     if (prevPage !== page || prevQuery !== query) {
-      this.setState({ isLoading: true });
+      // this.setState({ isLoading: true });
 
       const response = getImg(query, page);
       const images = response.hits;
@@ -32,15 +32,15 @@ export default class App extends Component {
         items: [...items, ...images],
       }));
 
-      this.setState({ isLoading: false });
+      // this.setState({ isLoading: false });
     }
   }
 
   handlerFormSubmit = () => {
     this.setState({
       page: 1,
-      isLoading: false,
-      error: false,
+      // isLoading: false,
+      // error: false,
       items: [],
       query: '',
     });
