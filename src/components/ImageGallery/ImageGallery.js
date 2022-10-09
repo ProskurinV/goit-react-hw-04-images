@@ -2,8 +2,6 @@
 import { GalleryContainer } from './ImageGallery.styled';
 import ImageGlleryItem from 'components/ImageGalleryItem/ImageGalleryItem';
 
-// Список карточек изображений. Создает DOM-элемент следующей структуры.
-
 export default function ImageGallery({ items }) {
   return (
     <GalleryContainer>

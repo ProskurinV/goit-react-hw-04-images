@@ -83,6 +83,7 @@ export default class App extends Component {
         {isLoading && <Loader />}
         <ImageGallery items={items} />
         {items.length > 12 && <LoadMoreBtn onClick={this.loadMore} />}
+        {isLoading && <Loader />}
         <Toaster />
       </MainBox>
     );

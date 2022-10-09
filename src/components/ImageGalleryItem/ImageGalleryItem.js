@@ -1,21 +1,29 @@
 // import PropTypes from 'prop-types';
 
+import { Component } from 'react';
 import { Item, Img } from './ImageGalleryItem.styled';
+import Modal from 'components/Modal/Modal';
 // Компонент элемента списка с изображением. Создает DOM-элемент следующей структуры.
 
-export default function ImageGlleryItem({
-  id,
-  webformatURL,
-  largeImageURL,
-  tags,
-}) {
-  return (
-    <Item id={id}>
-      <Img src={webformatURL} alt={tags} />
-    </Item>
-  );
-}
+export default class ImageGlleryItem extends Component {
+  state = { showModal: false };
 
-// GI(item => {
-//   setLaImgUrl(item.largeImUrl);
-// });
+  toggleModal = () => {
+    this.setState(({ showModal }) => ({
+      showModal: !showModal,
+    }));
+  };
+
+  render() {
+    const { showModal } = this.state;
+    const { item } = this.props;
+    return (
+      <>
+        <Item id={item.id} onClick={this.toggleModal}>
+          <Img src={item.webformatURL} alt={item.tags} />
+          {showModal && <Modal image={item} toggleModal={this.toggleModal} />}
+        </Item>
+      </>
+    );
+  }
+}
