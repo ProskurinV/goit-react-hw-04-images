@@ -1,4 +1,4 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import { Component } from 'react';
 import { Item, Img } from './ImageGalleryItem.styled';
@@ -27,3 +27,7 @@ export default class ImageGlleryItem extends Component {
     );
   }
 }
+
+ImageGlleryItem.propTypes = {
+  item: PropTypes.object.isRequired,
+};

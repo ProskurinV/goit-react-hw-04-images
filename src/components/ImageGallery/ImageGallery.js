@@ -1,4 +1,4 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { GalleryContainer } from './ImageGallery.styled';
 import ImageGlleryItem from 'components/ImageGalleryItem/ImageGalleryItem';
 
@@ -16,3 +16,7 @@ export default function ImageGallery({ items }) {
     </GalleryContainer>
   );
 }
+
+ImageGallery.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.object.isRequired),
+};

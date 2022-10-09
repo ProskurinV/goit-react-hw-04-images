@@ -1,4 +1,4 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import { LoadMore } from './Button.styled';
 
@@ -9,5 +9,9 @@ export default function LoadMoreBtn({ onClick }) {
     </LoadMore>
   );
 }
+
+LoadMoreBtn.protoType = {
+  onClick: PropTypes.func.isRequired,
+};
 
 // <button id="myBtn" title="Go to top">Top</button>
