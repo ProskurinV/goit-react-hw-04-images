@@ -12,7 +12,7 @@
 
 import { Component } from 'react';
 import { createPortal } from 'react-dom';
-import { ModalBackdrop, ModalWindow, Img } from './Modal.styled';
+import { ModalBackdrop, ModalWindow } from './Modal.styled';
 
 const modalRoot = document.querySelector('#modal-root');
 
@@ -39,7 +39,7 @@ export default class Modal extends Component {
 
   render() {
     return createPortal(
-      <ModalBackdrop onClick={this.handleClikOnBackdrop}>
+      <ModalBackdrop onClick={(this.handleClikOnBackdrop, this.handleKeyDown)}>
         <ModalWindow>
           {/* <Img src={largeImageURL} alt={tags} /> */}
         </ModalWindow>
