@@ -19,26 +19,43 @@ export default class App extends Component {
     error: false,
     query: '',
     page: 1,
+    // total: 0,
   };
 
   async componentDidUpdate(prevProps, prevState) {
-    const { page, query, error, items } = this.state;
+    const {
+      page,
+      query,
+      error,
+      // total
+    } = this.state;
     const { page: prevPage, query: prevQuery, error: prevError } = prevState;
     if (prevPage !== page || prevQuery !== query) {
-      this.fetchImg();
-    }
-
-    if (items.length === 0) {
-      toast.error(
-        'Sorry, there are no images matching your query. Please try again.'
-      );
-    }
-    if (query === '') {
-      toast.error('Write something!');
-    }
-
-    if (prevError !== error) {
-      toast.error(error);
+      // this.fetchImg();
+      try {
+        this.setState({ isLoading: true });
+        const response = await getImg(query, page);
+        const images = response.hits;
+        const total = response.total;
+        this.setState(({ items }) => ({
+          items: [...items, ...images],
+        }));
+        if (total === 0) {
+          toast.error(
+            'Sorry, there are no images matching your query. Please try again.'
+          );
+        }
+        if (query === '') {
+          toast.error('Write something!');
+        }
+        if (prevError !== error) {
+          toast.error(error);
+        }
+      } catch {
+        this.setState({ error: 'Can`t load images!' });
+      } finally {
+        this.setState({ isLoading: false });
+      }
     }
   }
 
@@ -52,21 +69,21 @@ export default class App extends Component {
     });
   };
 
-  fetchImg = async (query, page) => {
-    try {
-      this.setState({ isLoading: true });
-      const response = await getImg(query, page);
-      const images = response.hits;
-      this.setState(({ items }) => ({
-        items: [...items, ...images],
-        isLoading: false,
-      }));
-    } catch {
-      this.setState({ error: 'Can`t load images!' });
-    } finally {
-      this.setState({ isLoading: false });
-    }
-  };
+  // fetchImg = async (query, page) => {
+  //   try {
+  //     this.setState({ isLoading: true });
+  //     const response = await getImg(query, page);
+  //     const images = response.hits;
+  //     const total = response.total;
+  //     this.setState(({ items }) => ({
+  //       items: [...items, ...images],
+  //     }));
+  //   } catch {
+  //     this.setState({ error: 'Can`t load images!' });
+  //   } finally {
+  //     this.setState({ isLoading: false });
+  //   }
+  // };
 
   loadMore = () => {
     this.setState(prevState => ({
@@ -82,7 +99,7 @@ export default class App extends Component {
         <SearchBar onSubmit={this.handlerFormSubmit} />
         {isLoading && <Loader />}
         <ImageGallery items={items} />
-        {items.length > 12 && <LoadMoreBtn onClick={this.loadMore} />}
+        {items.length > 0 && <LoadMoreBtn onClick={this.loadMore} />}
         {isLoading && <Loader />}
         <Toaster />
       </MainBox>

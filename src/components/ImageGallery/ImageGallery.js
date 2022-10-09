@@ -5,13 +5,8 @@ import ImageGlleryItem from 'components/ImageGalleryItem/ImageGalleryItem';
 export default function ImageGallery({ items }) {
   return (
     <GalleryContainer>
-      {items.map(({ id, webformatURL, largeImageURL, tags }) => (
-        <ImageGlleryItem
-          key={id}
-          webformatURL={webformatURL}
-          largeImageURL={largeImageURL}
-          tags={tags}
-        />
+      {items.map(item => (
+        <ImageGlleryItem key={item.id} item={item} />
       ))}
     </GalleryContainer>
   );
