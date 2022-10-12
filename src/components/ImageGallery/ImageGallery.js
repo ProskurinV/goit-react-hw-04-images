@@ -13,5 +13,5 @@ export default function ImageGallery({ items }) {
 }
 
 ImageGallery.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object.isRequired),
+  items: PropTypes.arrayOf(PropTypes.number.isRequired),
 };

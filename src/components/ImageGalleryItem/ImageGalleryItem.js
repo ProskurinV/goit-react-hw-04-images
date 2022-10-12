@@ -19,8 +19,12 @@ export default class ImageGlleryItem extends Component {
     const { item } = this.props;
     return (
       <>
-        <Item id={item.id} onClick={this.toggleModal}>
-          <Img src={item.webformatURL} alt={item.tags} />
+        <Item id={item.id}>
+          <Img
+            src={item.webformatURL}
+            alt={item.tags}
+            onClick={this.toggleModal}
+          />
           {showModal && <Modal image={item} toggleModal={this.toggleModal} />}
         </Item>
       </>
@@ -29,5 +33,8 @@ export default class ImageGlleryItem extends Component {
 }
 
 ImageGlleryItem.propTypes = {
-  item: PropTypes.object.isRequired,
+  item: PropTypes.shape({
+    webformatURL: PropTypes.string.isRequired,
+    tags: PropTypes.string.isRequired,
+  }),
 };

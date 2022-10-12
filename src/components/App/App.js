@@ -63,6 +63,7 @@ export default class App extends Component {
   fetchImg = async (query, page) => {
     try {
       this.setState({ isLoading: true });
+
       const response = await getImg(query, page);
       const images = response.hits;
 

@@ -41,6 +41,9 @@ export default class Modal extends Component {
 }
 
 Modal.propTypes = {
-  image: PropTypes.object.isRequired,
+  image: PropTypes.shape({
+    largeImageURL: PropTypes.string.isRequired,
+    tags: PropTypes.string.isRequired,
+  }),
   toggleModal: PropTypes.func.isRequired,
 };

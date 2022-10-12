@@ -6,8 +6,9 @@ import { AiOutlineSearch } from 'react-icons/ai';
 export default function SearchBar({ onSubmit }) {
   const handleSubmit = async (values, actions) => {
     await onSubmit(values);
+
     actions.setSubmitting(false);
-    actions.resetForm();
+    // actions.resetForm();
   };
   return (
     <Formik initialValues={{ searchQuery: '' }} onSubmit={handleSubmit}>
@@ -31,6 +32,6 @@ export default function SearchBar({ onSubmit }) {
   );
 }
 
-SearchBar.protoTypes = {
+SearchBar.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };

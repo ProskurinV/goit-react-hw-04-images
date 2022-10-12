@@ -10,7 +10,7 @@ export default function LoadMoreBtn({ onClick }) {
   );
 }
 
-LoadMoreBtn.protoType = {
+LoadMoreBtn.propTypes = {
   onClick: PropTypes.func.isRequired,
 };
 
