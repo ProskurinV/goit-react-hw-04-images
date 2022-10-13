@@ -29,13 +29,12 @@ export default class App extends Component {
       // items
     } = this.state;
     const { page: prevPage, query: prevQuery, error: prevError } = prevState;
-    if (prevPage !== page || prevQuery !== query) {
-      this.fetchImg(query, page);
 
-      if (query === '') {
-        toast.error('Write something!');
-        return;
-      }
+    if (query === '') {
+      toast.error('Write something!');
+      return;
+    } else if (prevPage !== page || prevQuery !== query) {
+      this.fetchImg(query, page);
 
       // if (items.length === 0) {
       //   toast.error(
