@@ -22,12 +22,7 @@ export default class App extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    const {
-      page,
-      query,
-      error,
-      // items
-    } = this.state;
+    const { page, query, error } = this.state;
     const { page: prevPage, query: prevQuery, error: prevError } = prevState;
 
     if (query === '') {
@@ -35,13 +30,6 @@ export default class App extends Component {
       return;
     } else if (prevPage !== page || prevQuery !== query) {
       this.fetchImg(query, page);
-
-      // if (items.length === 0) {
-      //   toast.error(
-      //     'Sorry, there are no images matching your query. Please try again.'
-      //   );
-      //   return;
-      // }
 
       if (prevError !== error) {
         toast.error(error);
@@ -65,6 +53,13 @@ export default class App extends Component {
 
       const response = await getImg(query, page);
       const images = response.hits;
+
+      if (images.length === 0) {
+        toast.error(
+          'Sorry, there are no images matching your query. Please try again.'
+        );
+        return;
+      }
 
       this.setState(({ items }) => ({
         items: [...items, ...images],
