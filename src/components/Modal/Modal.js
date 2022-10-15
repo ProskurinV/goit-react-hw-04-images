@@ -1,43 +1,39 @@
 import PropTypes from 'prop-types';
 
-import { Component } from 'react';
+import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { ModalBackdrop, ModalWindow, Img } from './Modal.styled';
 
 const modalRoot = document.querySelector('#modal-root');
 
-export default class Modal extends Component {
-  componentDidMount() {
-    window.addEventListener('keydown', this.handleKeyDown);
-  }
+export default function Modal({ image, toggleModal }) {
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  });
 
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleKeyDown);
-  }
-
-  handleKeyDown = event => {
+  const handleKeyDown = event => {
     if (event.code === 'Escape') {
-      this.props.toggleModal();
+      toggleModal();
     }
   };
 
-  handleClikOnBackdrop = event => {
+  const handleClikOnBackdrop = event => {
     if (event.currentTarget === event.target) {
-      this.props.toggleModal();
+      toggleModal();
     }
   };
 
-  render() {
-    const { image } = this.props;
-    return createPortal(
-      <ModalBackdrop onClick={this.handleClikOnBackdrop}>
-        <ModalWindow onClick={this.handleKeyDown}>
-          <Img src={image.largeImageURL} alt={image.tags} />
-        </ModalWindow>
-      </ModalBackdrop>,
-      modalRoot
-    );
-  }
+  return createPortal(
+    <ModalBackdrop onClick={handleClikOnBackdrop}>
+      <ModalWindow onClick={handleKeyDown}>
+        <Img src={image.largeImageURL} alt={image.tags} />
+      </ModalWindow>
+    </ModalBackdrop>,
+    modalRoot
+  );
 }
 
 Modal.propTypes = {

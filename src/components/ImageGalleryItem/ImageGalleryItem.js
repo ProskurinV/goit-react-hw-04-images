@@ -1,35 +1,26 @@
 import PropTypes from 'prop-types';
 
-import { Component } from 'react';
+import { useState } from 'react';
 import { Item, Img } from './ImageGalleryItem.styled';
 import Modal from 'components/Modal/Modal';
-// Компонент элемента списка с изображением. Создает DOM-элемент следующей структуры.
 
-export default class ImageGlleryItem extends Component {
-  state = { showModal: false };
+export default function ImageGlleryItem(item) {
+  const [showModal, setShowModal] = useState(false);
 
-  toggleModal = () => {
-    this.setState(({ showModal }) => ({
+  const toggleModal = () => {
+    setShowModal(showModal => ({
       showModal: !showModal,
     }));
   };
 
-  render() {
-    const { showModal } = this.state;
-    const { item } = this.props;
-    return (
-      <>
-        <Item id={item.id}>
-          <Img
-            src={item.webformatURL}
-            alt={item.tags}
-            onClick={this.toggleModal}
-          />
-          {showModal && <Modal image={item} toggleModal={this.toggleModal} />}
-        </Item>
-      </>
-    );
-  }
+  return (
+    <>
+      <Item id={item.id}>
+        <Img src={item.webformatURL} alt={item.tags} onClick={toggleModal} />
+        {showModal && <Modal image={item} toggleModal={toggleModal} />}
+      </Item>
+    </>
+  );
 }
 
 ImageGlleryItem.propTypes = {
