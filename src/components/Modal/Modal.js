@@ -8,17 +8,16 @@ const modalRoot = document.querySelector('#modal-root');
 
 export default function Modal({ image, toggleModal }) {
   useEffect(() => {
+    const handleKeyDown = event => {
+      if (event.code === 'Escape') {
+        toggleModal();
+      }
+    };
     window.addEventListener('keydown', handleKeyDown);
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  });
-
-  const handleKeyDown = event => {
-    if (event.code === 'Escape') {
-      toggleModal();
-    }
-  };
+  }, [toggleModal]);
 
   const handleClikOnBackdrop = event => {
     if (event.currentTarget === event.target) {
@@ -28,7 +27,7 @@ export default function Modal({ image, toggleModal }) {
 
   return createPortal(
     <ModalBackdrop onClick={handleClikOnBackdrop}>
-      <ModalWindow onClick={handleKeyDown}>
+      <ModalWindow>
         <Img src={image.largeImageURL} alt={image.tags} />
       </ModalWindow>
     </ModalBackdrop>,

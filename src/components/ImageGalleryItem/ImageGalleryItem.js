@@ -4,13 +4,11 @@ import { useState } from 'react';
 import { Item, Img } from './ImageGalleryItem.styled';
 import Modal from 'components/Modal/Modal';
 
-export default function ImageGlleryItem(item) {
+export default function ImageGlleryItem({ item }) {
   const [showModal, setShowModal] = useState(false);
 
   const toggleModal = () => {
-    setShowModal(showModal => ({
-      showModal: !showModal,
-    }));
+    setShowModal(showModal => !showModal);
   };
 
   return (
